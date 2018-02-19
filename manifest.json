@@ -10,8 +10,17 @@
         "default_popup": "popup.html"
     },
 
-    "permissions": [
-        "tabs",
-        "<all_urls>"
+    "author": "yonggoo.noh@gmail.com",
+
+    "permissions": ["tabs", "<all_urls>"],
+
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.github.com/*/issues"
+            ],
+            "js": ["changeButton.js"],
+            "css": ["changeButton.css"]
+        }
     ]
 }

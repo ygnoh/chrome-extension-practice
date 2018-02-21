@@ -19,7 +19,8 @@
         }
     ],
     "permissions": [
-        "tabs"
+        "tabs",
+        "webNavigation"
     ],
     "author": "yonggoo.noh@gmail.com"
 }

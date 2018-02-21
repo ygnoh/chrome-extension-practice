@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if (msg === "url-updated" || msg === "page-refreshed") {
-        const issueButton = document.querySelector(".btn-primary");
+        const issueButton = document.querySelector('a.btn[href$="/issues/new"]')
         issueButton.href = "#";
         const dropdown = `
             <div id="myDropdown" class="dropdown-content">

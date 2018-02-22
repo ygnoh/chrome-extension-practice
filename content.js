@@ -6,24 +6,53 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
             return;
         }
 
-        const plusButton = document.createElement("button");
-        plusButton.classList.add("btn", "btn-primary", "select-menu-button", "float-right");
-        plusButton.addEventListener("click", toggleDropdown);
+        const href = newIssueButton.getAttribute("href");
+        const subnav = newIssueButton.parentNode;
 
-        const dropdown = `
-            <div id="myDropdown" class="dropdown-content">
-                <a href="${location.pathname}/new?template=bug.md&labels=bug">Bug</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-        `;
+        subnav.removeChild(newIssueButton);
 
-        plusButton.innerHTML = dropdown;
-
-        newIssueButton.parentNode.insertBefore(plusButton, null);
+        const advancedIssueButton = getAdvancedIssueButton(href);
+        subnav.innerHTML += advancedIssueButton;
     }
 });
 
-function toggleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("is-active");
+// TODO: 리팩토링 해야함
+function getAdvancedIssueButton(href = "#") {
+    return `
+        <div class="select-menu d-inline-block js-menu-container js-select-menu float-right">
+            <div class="BtnGroup">
+            <a href="${href}" class="btn btn-primary BtnGroup-item">
+                New issue
+            </a>
+        
+            <button class="btn btn-primary select-menu-button BtnGroup-item js-menu-target" aria-expanded="false"></button>
+            </div>
+        
+            <div class="select-menu-modal-holder">
+            <div class="select-menu-modal">
+                <div class="select-menu-list js-navigation-container js-active-navigation-container">
+
+                <div class="select-menu-item js-navigation-item">
+                    <div class="select-menu-item-text">
+                    <span class="select-menu-item-heading">Create a merge commit</span>
+                    </div>
+                </div>
+
+                <div class="select-menu-item js-navigation-item">
+                    <div class="select-menu-item-text">
+                    <span class="select-menu-item-heading">Create a merge commit</span>
+                    </div>
+                </div>
+
+                <div class="select-menu-item js-navigation-item">
+                    <div class="select-menu-item-text">
+                    <span class="select-menu-item-heading">Create a merge commit</span>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    `;
 }
